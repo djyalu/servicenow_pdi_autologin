@@ -1,0 +1,42 @@
+name: ServiceNow Weekly Login
+
+on:
+  schedule:
+    # Runs at 00:00 UTC on Sunday (Every week)
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+jobs:
+  auto-login:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        playwright install chromium
+
+    - name: Run Login Script
+      env:
+        SN_USERNAME: ${{ secrets.SN_USERNAME }}
+        SN_PASSWORD: ${{ secrets.SN_PASSWORD }}
+      run: python main.py
+
+    - name: Upload Login Screenshot
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: login-screenshot
+        path: |
+          login_result.png
+          error_state.png
+        if-no-files-found: ignore
