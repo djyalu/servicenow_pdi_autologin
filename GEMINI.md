@@ -23,7 +23,7 @@ ServiceNow PDI (Personal Developer Instance) 자동 로그인 스크립트 개�
 ## Checkpoints
 - [x] **Checkpoint 1 Initial Setup**: Repository Clone & Project Initialization
 - [x] **Checkpoint 2 Implementation**: Python Script & Github Actions Workflow Created
-- [ ] **Checkpoint 3 Validation**: Verification of script logic and deployment
+- [x] **Checkpoint 3 Validation**: Verification of script logic and deployment
 
 ## History
 - **2026-01-22**: 프로젝트 초기화 및 `GEMINI.md` 작성. 저장소 클론 완료. (Project Manager)
@@ -32,3 +32,4 @@ ServiceNow PDI (Personal Developer Instance) 자동 로그인 스크립트 개�
 - **2026-01-22**: 종속성 관리를 위한 `requirements.txt` 초기화. (아키텍트)
 - **2026-01-22**: Playwright 스크립트의 ServiceNow 로그인 시나리오 코드 리뷰 완료. (품질 관리자)
 - **2026-01-22**: Github Actions 연동 및 환경 변수 기반 동작 테스트 시나리오 정의. (테스터)
+- **2026-01-22**: Github Actions 수동 실행 테스트 성공. 로그인 정상 처리 및 스크린샷 캡처 확인 완료. (품질 관리자, 테스터, Project Manager)
