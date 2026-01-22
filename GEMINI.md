@@ -6,7 +6,7 @@ ServiceNow PDI (Personal Developer Instance) 자동 로그인 스크립트 개�
 ## Project Information
 - **Target URL**: https://dev198124.service-now.com
 - **Repository**: https://github.com/djyalu/servicenow_pdi_autologin.git
-- **Schedule**: Weekly (Every week)
+- **Schedule**: Every 3 days
 - **Credentials**: Managed via Github Actions Secrets/Variables
 
 ## Team Roles & Assignments
@@ -33,3 +33,4 @@ ServiceNow PDI (Personal Developer Instance) 자동 로그인 스크립트 개�
 - **2026-01-22**: Playwright 스크립트의 ServiceNow 로그인 시나리오 코드 리뷰 완료. (품질 관리자)
 - **2026-01-22**: Github Actions 연동 및 환경 변수 기반 동작 테스트 시나리오 정의. (테스터)
 - **2026-01-22**: Github Actions 수동 실행 테스트 성공. 로그인 정상 처리 및 스크린샷 캡처 확인 완료. (품질 관리자, 테스터, Project Manager)
+- **2026-01-22**: 인스턴스 회수 방지를 위해 실행 주기를 7일에서 3일로 단축 변경. (아키텍트, 배포담당자)
