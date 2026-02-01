@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
+      SN_PDI_URL: ${{ vars.SN_PDI_URL || 'https://dev198124.service-now.com' }}
       SN_USERNAME: ${{ secrets.SN_USERNAME }}
       SN_PASSWORD: ${{ secrets.SN_PASSWORD }}
 

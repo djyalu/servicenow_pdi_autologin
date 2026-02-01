@@ -5,8 +5,8 @@ import json
 from datetime import datetime
 from playwright.sync_api import sync_playwright
 
-# Target URL
-URL = "https://dev198124.service-now.com"
+# Configuration from Environment Variables
+URL = os.getenv("SN_PDI_URL", "https://dev198124.service-now.com")
 
 # Credentials from Environment Variables
 USERNAME = os.getenv("SN_USERNAME")
