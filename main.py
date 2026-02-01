@@ -1,6 +1,8 @@
 import os
 import sys
 import time
+import json
+from datetime import datetime
 from playwright.sync_api import sync_playwright
 
 # Target URL
@@ -9,6 +11,31 @@ URL = "https://dev198124.service-now.com"
 # Credentials from Environment Variables
 USERNAME = os.getenv("SN_USERNAME")
 PASSWORD = os.getenv("SN_PASSWORD")
+HISTORY_FILE = "login_history.json"
+
+def save_history(status, title=None, error=None):
+    history = []
+    if os.path.exists(HISTORY_FILE):
+        try:
+            with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+                history = json.load(f)
+        except:
+            pass
+    
+    entry = {
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "status": status,
+        "title": title,
+        "error": str(error) if error else None
+    }
+    
+    history.append(entry)
+    # Keep only last 50 entries
+    history = history[-50:]
+    
+    with open(HISTORY_FILE, "w", encoding="utf-8") as f:
+        json.dump(history, f, indent=2, ensure_ascii=False)
+    print(f"History saved to {HISTORY_FILE}")
 
 def run():
     print("Starting ServiceNow Auto Login Script...")
@@ -60,17 +87,19 @@ def run():
             
             if "Sign In" in current_title or "Login" in current_title:
                 print("Warning: Title still suggests login page. Identify if login failed.")
+                save_history("Warning", title=current_title, error="Title suggests login page")
             else:
                 print("Login appears successful based on page title.")
+                save_history("Success", title=current_title)
 
         except Exception as e:
             print(f"An error occurred: {e}")
-            # Capture error state
             try:
                 page.screenshot(path="error_state.png")
                 print("Screenshot 'error_state.png' saved.")
             except:
                 pass
+            save_history("Error", error=e)
             sys.exit(1)
         finally:
             browser.close()

@@ -2,17 +2,26 @@ name: ServiceNow Weekly Login
 
 on:
   schedule:
-    # Runs at 00:00 UTC every 3 days
-    - cron: '0 0 */3 * *'
+    # Runs at 00:00 UTC and 20:00 UTC every day (effectively every 20 hours interval start)
+    - cron: '0 */20 * * *'
   workflow_dispatch:
 
 jobs:
   auto-login:
     runs-on: ubuntu-latest
     
+    env:
+      SN_USERNAME: ${{ secrets.SN_USERNAME }}
+      SN_PASSWORD: ${{ secrets.SN_PASSWORD }}
+
+    permissions:
+      contents: write
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -26,10 +35,20 @@ jobs:
         playwright install chromium
 
     - name: Run Login Script
-      env:
-        SN_USERNAME: ${{ secrets.SN_USERNAME }}
-        SN_PASSWORD: ${{ secrets.SN_PASSWORD }}
       run: python main.py
+
+    - name: Commit and Push History
+      if: always()
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add login_history.json
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Update login history [skip ci]"
+          git push
+        fi
 
     - name: Upload Login Screenshot
       if: always()
