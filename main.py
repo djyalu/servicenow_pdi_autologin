@@ -73,6 +73,17 @@ def run():
             print("Waiting for post-login page load...")
             page.wait_for_load_state("networkidle", timeout=60000)
             
+            # Check for error messages on the page
+            error_message = None
+            try:
+                # Wait a short bit for potential error alerts to appear
+                error_selector = ".outputmsg_error"
+                if page.is_visible(error_selector):
+                    error_message = page.inner_text(error_selector).strip()
+                    print(f"Login Error detected: {error_message}")
+            except:
+                pass
+
             # Validating login success
             # Use a generic check or title check. 
             # If we see the user menu or specific post-login elements, it's a success.
@@ -87,7 +98,7 @@ def run():
             
             if "Sign In" in current_title or "Login" in current_title:
                 print("Warning: Title still suggests login page. Identify if login failed.")
-                save_history("Warning", title=current_title, error="Title suggests login page")
+                save_history("Warning", title=current_title, error=error_message or "Title suggests login page")
             else:
                 print("Login appears successful based on page title.")
                 save_history("Success", title=current_title)
