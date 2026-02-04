@@ -34,5 +34,11 @@
     "status": "Error",
     "title": null,
     "error": "Page.wait_for_selector: Timeout 300000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-02-04 01:18:14",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 300000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
   }
 ]
