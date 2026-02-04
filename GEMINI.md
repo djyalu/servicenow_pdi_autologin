@@ -6,7 +6,7 @@ ServiceNow PDI (Personal Developer Instance) 자동 로그인 스크립트 개�
 ## Project Information
 - **Target URL**: https://dev198124.service-now.com
 - **Repository**: https://github.com/djyalu/servicenow_pdi_autologin.git
-- **Schedule**: Every 3 days
+- **Schedule**: Every 10 hours
 - **Credentials**: Managed via Github Actions Secrets/Variables
 
 ## Team Roles & Assignments
@@ -37,3 +37,4 @@ ServiceNow PDI (Personal Developer Instance) 자동 로그인 스크립트 개�
 - **2026-02-04**: PDI 휴면(Hibernation) 상태로 인한 로그인 실패 확인 및 대응 로직 설계 완료. (분석 설계자, 아키텍트)
 - **2026-02-04**: ServiceNow ID(SSO)를 통한 인스턴스 자동 Wake-up 기능 추가 및 `main.py` 고도화 완료. (백엔드 개발자)
 - **2026-02-04**: 로컬 시뮬레이션을 통해 휴면 감지 및 SSO 로그인 진입 확인 완료. (테스터, 품질 관리자)
+- **2026-02-04**: 실행 주기를 10시간으로 단축하고 최종 로그인 성공 확인. 프로젝트 배포 완료. (배포담당자, Project Manager)
