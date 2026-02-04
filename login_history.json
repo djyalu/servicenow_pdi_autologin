@@ -52,5 +52,11 @@
     "status": "Error",
     "title": null,
     "error": "Page.wait_for_selector: Timeout 300000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-02-04 12:09:42",
+    "status": "Warning",
+    "title": "Log in | ServiceNow",
+    "error": "Error Message\nUser name or password invalid. To reset your admin password click here. Please note this is different than the credentials used to sign in to the Developer Site."
   }
 ]
