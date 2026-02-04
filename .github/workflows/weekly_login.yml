@@ -2,8 +2,8 @@ name: ServiceNow Weekly Login
 
 on:
   schedule:
-    # Runs at 00:00 UTC and 20:00 UTC every day (effectively every 20 hours interval start)
-    - cron: '0 */20 * * *'
+    # Runs every 10 hours
+    - cron: '0 */10 * * *'
   workflow_dispatch:
 
 jobs:

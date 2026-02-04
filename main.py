@@ -53,13 +53,49 @@ def run():
         try:
             print(f"Navigating to {URL}...")
             # Set a long timeout for navigation because PDI might be waking up (hibernating)
-            response = page.goto(URL, timeout=300000) # 5 minutes timeout
+            page.goto(URL, timeout=300000) # 5 minutes timeout
             
-            # Check for common "Waking up" indicators or wait for login form
-            print("Waiting for login form (Timeout: 5 minutes)...")
-            
+            # 1. Detection: Check if the instance is hibernating
+            content = page.content().lower()
+            if "hibernating" in content or "wake your instance" in content:
+                print("Detected PDI Hibernation. Starting wake-up process...")
+                
+                # Navigate to developer portal login
+                # This URL usually triggers the SSO flow
+                dev_portal_login_url = "https://signon.service-now.com/x_snc_ssoauth.do?redirectUri=https://developer.servicenow.com/dev.do"
+                print(f"Navigating to ServiceNow ID login: {dev_portal_login_url}")
+                page.goto(dev_portal_login_url, timeout=120000)
+                
+                # Step A: Enter Username
+                print(f"Entering username: {USERNAME}")
+                page.wait_for_selector("#username", state="visible", timeout=60000)
+                page.fill("#username", USERNAME)
+                page.click("#identify-submit")
+                
+                # Step B: Enter Password
+                print("Waiting for password field...")
+                page.wait_for_selector("#password", state="visible", timeout=60000)
+                page.fill("#password", PASSWORD)
+                
+                print("Submitting login...")
+                # Try both ID and pressing Enter
+                page.press("#password", "Enter")
+                
+                # Wait for redirection to developer portal
+                print("Waiting for redirection to Developer Portal...")
+                page.wait_for_load_state("networkidle", timeout=120000)
+                
+                print("Successfully logged into Developer Portal. PDI should be waking up.")
+                # Optional: Wait a bit for the wake up process to start
+                time.sleep(10) 
+                
+                # Go back to the PDI URL
+                print(f"Returning to PDI URL: {URL}")
+                page.goto(URL, timeout=300000)
+
+            # 2. Standard Login Process
+            print("Waiting for PDI login form (Timeout: 5 minutes)...")
             # This selector is standard for the main frame login on ServiceNow
-            # If inside an iframe, logic might need adjustment, but usually PDI login is top-level.
             page.wait_for_selector("#user_name", state="visible", timeout=300000)
             
             print("Login form detected. Entering credentials...")
@@ -85,22 +121,18 @@ def run():
                 pass
 
             # Validating login success
-            # Use a generic check or title check. 
-            # If we see the user menu or specific post-login elements, it's a success.
-            # But simply not erroring out and ensuring URL changed or specific elements are gone is a good start.
-            
             current_title = page.title()
             print(f"Current Page Title: {current_title}")
             
-            # Take a screenshot for validaton in artifacts
+            # Take a screenshot for validation in artifacts
             page.screenshot(path="login_result.png")
             print("Screenshot 'login_result.png' saved.")
             
-            if "Sign In" in current_title or "Login" in current_title:
-                print("Warning: Title still suggests login page. Identify if login failed.")
+            if "Sign In" in current_title or "Login" in current_title or error_message:
+                print("Warning: Title still suggests login page or error message found.")
                 save_history("Warning", title=current_title, error=error_message or "Title suggests login page")
             else:
-                print("Login appears successful based on page title.")
+                print("Login successful.")
                 save_history("Success", title=current_title)
 
         except Exception as e:
