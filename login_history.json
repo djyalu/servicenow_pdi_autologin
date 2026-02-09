@@ -160,5 +160,11 @@
     "status": "Success",
     "title": "ServiceNow",
     "error": null
+  },
+  {
+    "timestamp": "2026-02-09 20:40:07",
+    "status": "Error",
+    "title": null,
+    "error": "Page.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#identify-submit\")\n    - locator resolved to <button disabled type=\"submit\" id=\"identify-submit\" class=\"btn-primary-md w-full\">Next</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not enabled\n     - retrying click action\n       - waiting 500ms\n"
   }
 ]
