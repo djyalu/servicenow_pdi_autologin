@@ -2,8 +2,8 @@ name: ServiceNow Weekly Login
 
 on:
   schedule:
-    # Runs every 10 hours
-    - cron: '0 */10 * * *'
+    # Runs every 3 hours
+    - cron: '0 */3 * * *'
   workflow_dispatch:
 
 jobs:
@@ -60,3 +60,22 @@ jobs:
           login_result.png
           error_state.png
         if-no-files-found: ignore
+
+    - name: Send Mail on Failure
+      if: failure()
+      uses: dawidd6/action-send-mail@v3
+      with:
+        # Gmail SMTP settings
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.MAIL_USERNAME }}
+        password: ${{ secrets.MAIL_PASSWORD }}
+        subject: "[ServiceNow PDI] Auto Login Failed"
+        to: go41@naver.com
+        from: ServiceNow AutoBot <${{ secrets.MAIL_USERNAME }}>
+        body: |
+          ServiceNow PDI Auto Login script failed.
+          
+          Workflow URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          
+          Please check the error logs and screenshots in the artifacts.
