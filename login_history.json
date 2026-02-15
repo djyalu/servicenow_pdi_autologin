@@ -1,11 +1,5 @@
 [
   {
-    "timestamp": "2026-02-04 12:09:42",
-    "status": "Warning",
-    "title": "Log in | ServiceNow",
-    "error": "Error Message\nUser name or password invalid. To reset your admin password click here. Please note this is different than the credentials used to sign in to the Developer Site."
-  },
-  {
     "timestamp": "2026-02-04 12:14:27",
     "status": "Warning",
     "title": "Log in | ServiceNow",
@@ -295,6 +289,12 @@
   },
   {
     "timestamp": "2026-02-15 09:31:42",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-02-15 12:50:30",
     "status": "Success",
     "title": "ServiceNow",
     "error": null
