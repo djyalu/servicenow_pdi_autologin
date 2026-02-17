@@ -26,7 +26,7 @@ ServiceNow PDI (Personal Developer Instance) 자동 로그인 스크립트 개�
 - [x] **Checkpoint 2 Implementation**: Python Script & Github Actions Workflow Created
 - [x] **Checkpoint 3 Validation**: Verification of script logic and deployment
 - [x] **Checkpoint 4 Schedule Update**: Update login interval to 3 hours
-- [ ] **Checkpoint 5 Multi-PDI Support**: Support for multiple ServiceNow instances
+- [x] **Checkpoint 5 Multi-PDI Support**: Support for multiple ServiceNow instances
 
 ## History
 - **2026-01-22**: 프로젝트 초기화 및 `GEMINI.md` 작성. 저장소 클론 완료. (Project Manager)
@@ -51,3 +51,4 @@ ServiceNow PDI (Personal Developer Instance) 자동 로그인 스크립트 개�
 - **2026-02-17**: 여러 PDI 관리를 위해 멀티 인스턴스 로그인 기능 추가 결정. (분석 설계자, 아키텍트)
 - **2026-02-17**: GitHub Actions Matrix 전략을 도입하여 각 PDI에 대한 독립 실행 및 개별 알림 기능 구현 완료. (아키텍트, 배포담당자)
 - **2026-02-17**: `main.py`를 단일 URL 처리 방식으로 최적화하여 안정성 확보. (백엔드 개발자)
+- **2026-02-17**: Matrix 병렬 실행 시 Git 충돌 문제를 해결하기 위해 `finalize` 이력 통합 Job 도입 및 배포 완료. (아키텍트, 배포담당자)
