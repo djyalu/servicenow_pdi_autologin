@@ -1,11 +1,5 @@
 [
   {
-    "timestamp": "2026-02-09 10:56:48",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-02-09 20:40:07",
     "status": "Error",
     "title": null,
@@ -298,5 +292,11 @@
     "status": "Success",
     "title": "ServiceNow",
     "error": null
+  },
+  {
+    "timestamp": "2026-02-17 13:53:33",
+    "status": "Error",
+    "title": null,
+    "error": "Page.goto: net::ERR_NAME_NOT_RESOLVED at https://dev198124.service-now.com, https://dev282207.service-now.com\nCall log:\n  - navigating to \"https://dev198124.service-now.com, https://dev282207.service-now.com\", waiting until \"load\"\n"
   }
 ]
