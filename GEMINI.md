@@ -9,6 +9,7 @@ ServiceNow PDI (Personal Developer Instance) 자동 로그인 스크립트 개�
 - **Schedule**: Every 3 hours
 - **Notification**: go41@naver.com (on failure)
 - **Credentials**: Managed via Github Actions Secrets/Variables
+- **Setup Guide**: [GITHUB_SETUP.md](./GITHUB_SETUP.md)
 
 ## Team Roles & Assignments
 1. **분석 설계자**: 요구사항 분석 및 전체 아키텍처 설계
