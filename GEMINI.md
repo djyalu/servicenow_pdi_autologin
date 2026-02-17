@@ -26,6 +26,7 @@ ServiceNow PDI (Personal Developer Instance) 자동 로그인 스크립트 개�
 - [x] **Checkpoint 2 Implementation**: Python Script & Github Actions Workflow Created
 - [x] **Checkpoint 3 Validation**: Verification of script logic and deployment
 - [x] **Checkpoint 4 Schedule Update**: Update login interval to 3 hours
+- [ ] **Checkpoint 5 Multi-PDI Support**: Support for multiple ServiceNow instances
 
 ## History
 - **2026-01-22**: 프로젝트 초기화 및 `GEMINI.md` 작성. 저장소 클론 완료. (Project Manager)
@@ -47,3 +48,6 @@ ServiceNow PDI (Personal Developer Instance) 자동 로그인 스크립트 개�
 - **2026-02-13**: Github Actions에 `dawidd6/action-send-mail`을 이용한 실패 알림 전송 단계 추가. (배포담당자)
 - **2026-02-13**: 알림 설정을 위한 SMTP 관련 Secrets(`MAIL_USERNAME`, `MAIL_PASSWORD`) 필요 사항 정의. (아키텍트, Project Manager)
 - **2026-02-13**: 메일 발송 서버를 네이버에서 Gmail(`smtp.gmail.com`)로 변경하여 설정 최적화. (아키텍트, 배포담당자)
+- **2026-02-17**: 여러 PDI 관리를 위해 멀티 인스턴스 로그인 기능 추가 결정. (분석 설계자, 아키텍트)
+- **2026-02-17**: `SN_PDI_URL`에 콤마로 구분된 여러 URL을 입력하고, 공통 계정을 사용하는 방식으로 `main.py` 고도화 완료. (백엔드 개발자, 아키텍트)
+- **2026-02-17**: `login_history.json`에 URL 정보를 포함하여 멀티 인스턴스 이력을 개별 관리하도록 수정. (백엔드 개발자)
