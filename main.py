@@ -12,10 +12,14 @@ PASSWORD = os.getenv("SN_PASSWORD")
 HISTORY_FILE = "login_history.json"
 
 def save_history(instance_url, status, title=None, error=None):
+    # Create a unique history file for this instance to avoid matrix conflicts
+    safe_name = instance_url.split("//")[-1].strip("/").replace(".", "_").replace("/", "_")
+    instance_history_file = f"history_{safe_name}.json"
+    
     history = []
-    if os.path.exists(HISTORY_FILE):
+    if os.path.exists(instance_history_file):
         try:
-            with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+            with open(instance_history_file, "r", encoding="utf-8") as f:
                 history = json.load(f)
         except:
             pass
@@ -29,12 +33,11 @@ def save_history(instance_url, status, title=None, error=None):
     }
     
     history.append(entry)
-    # Keep only last 100 entries
-    history = history[-100:]
+    history = history[-50:] # Keep last 50 for this instance
     
-    with open(HISTORY_FILE, "w", encoding="utf-8") as f:
+    with open(instance_history_file, "w", encoding="utf-8") as f:
         json.dump(history, f, indent=2, ensure_ascii=False)
-    print(f"History for {instance_url} saved to {HISTORY_FILE}")
+    print(f"History for {instance_url} saved to {instance_history_file}")
 
 def run():
     print(f"Starting ServiceNow Auto Login for: {URL}")

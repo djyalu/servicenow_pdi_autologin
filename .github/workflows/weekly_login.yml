@@ -13,14 +13,10 @@ jobs:
     steps:
       - id: set-matrix
         run: |
-          # Read URL from variables, default to a single instance if empty
           URL_LIST="${{ vars.SN_PDI_URL }}"
           if [ -z "$URL_LIST" ]; then
             URL_LIST="https://dev198124.service-now.com"
           fi
-          
-          # Convert comma-separated string to JSON array
-          # E.g. "url1, url2" -> ["url1", "url2"]
           JSON_ARRAY=$(echo "$URL_LIST" | awk -F',' '{for(i=1;i<=NF;i++) {gsub(/^[ \t]+|[ \t]+$/, "", $i); printf "\"%s\"%s", $i, (i==NF?"":",")}}')
           echo "matrix={\"url\": [$JSON_ARRAY]}" >> $GITHUB_OUTPUT
 
@@ -28,16 +24,13 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false # One failure should not stop others
+      fail-fast: false
       matrix: ${{ fromJson(needs.setup.outputs.matrix) }}
     
     env:
       SN_PDI_URL: ${{ matrix.url }}
       SN_USERNAME: ${{ secrets.SN_USERNAME }}
       SN_PASSWORD: ${{ secrets.SN_PASSWORD }}
-
-    permissions:
-      contents: write
 
     steps:
     - name: Checkout repository
@@ -57,29 +50,15 @@ jobs:
     - name: Run Login Script
       run: python main.py
 
-    - name: Commit and Push History
-      if: always()
-      run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        # Since multiple jobs might push at once, let's use a retry or just pull first
-        git pull origin main --rebase
-        git add login_history.json
-        if git diff --staged --quiet; then
-          echo "No changes"
-        else
-          git commit -m "Update history for ${{ matrix.url }} [skip ci]"
-          git push origin main
-        fi
-
-    - name: Upload Login Screenshot
+    - name: Upload Results
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: screenshot-${{ strategy.job-index }}
+        name: result-${{ strategy.job-index }}
         path: |
           result_*.png
           error_*.png
+          history_*.json
         if-no-files-found: ignore
 
     - name: Send Mail on Failure
@@ -95,7 +74,6 @@ jobs:
         from: ServiceNow AutoBot <${{ secrets.MAIL_USERNAME }}>
         body: |
           ServiceNow PDI Auto Login failed for: ${{ matrix.url }}
-          
           Workflow URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
     - name: Send Mail on Success
@@ -111,5 +89,53 @@ jobs:
         from: ServiceNow AutoBot <${{ secrets.MAIL_USERNAME }}>
         body: |
           ServiceNow PDI Auto Login successful for: ${{ matrix.url }}
-          
           Workflow URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+  finalize:
+    needs: auto-login
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Download all artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: results
+        pattern: result-*
+        merge-multiple: true
+
+    - name: Merge History and Push
+      run: |
+        python -c "
+        import json, os, glob
+        history = []
+        if os.path.exists('login_history.json'):
+            with open('login_history.json', 'r', encoding='utf-8') as f:
+                history = json.load(f)
+        
+        # Add new entries from all matrix jobs
+        for fpath in glob.glob('results/history_*.json'):
+            with open(fpath, 'r', encoding='utf-8') as f:
+                new_entries = json.load(f)
+                history.extend(new_entries)
+        
+        # Sort by timestamp and keep last 200
+        history.sort(key=lambda x: x['timestamp'])
+        history = history[-200:]
+        
+        with open('login_history.json', 'w', encoding='utf-8') as f:
+            json.dump(history, f, indent=2, ensure_ascii=False)
+        "
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add login_history.json
+        if git diff --staged --quiet; then
+          echo "No changes"
+        else
+          git commit -m "Merge multi-PDI login history [skip ci]"
+          git push origin main
+        fi
