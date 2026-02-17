@@ -2,16 +2,37 @@ name: ServiceNow Weekly Login
 
 on:
   schedule:
-    # Runs every 3 hours
     - cron: '0 */3 * * *'
   workflow_dispatch:
 
 jobs:
-  auto-login:
+  setup:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        run: |
+          # Read URL from variables, default to a single instance if empty
+          URL_LIST="${{ vars.SN_PDI_URL }}"
+          if [ -z "$URL_LIST" ]; then
+            URL_LIST="https://dev198124.service-now.com"
+          fi
+          
+          # Convert comma-separated string to JSON array
+          # E.g. "url1, url2" -> ["url1", "url2"]
+          JSON_ARRAY=$(echo "$URL_LIST" | awk -F',' '{for(i=1;i<=NF;i++) {gsub(/^[ \t]+|[ \t]+$/, "", $i); printf "\"%s\"%s", $i, (i==NF?"":",")}}')
+          echo "matrix={\"url\": [$JSON_ARRAY]}" >> $GITHUB_OUTPUT
+
+  auto-login:
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false # One failure should not stop others
+      matrix: ${{ fromJson(needs.setup.outputs.matrix) }}
     
     env:
-      SN_PDI_URL: ${{ vars.SN_PDI_URL || 'https://dev198124.service-now.com' }}
+      SN_PDI_URL: ${{ matrix.url }}
       SN_USERNAME: ${{ secrets.SN_USERNAME }}
       SN_PASSWORD: ${{ secrets.SN_PASSWORD }}
 
@@ -21,8 +42,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -38,37 +57,26 @@ jobs:
     - name: Run Login Script
       run: python main.py
 
-    - name: Prepare Status Report
-      if: always()
-      id: report
-      run: |
-        if [ -f status_report.txt ]; then
-          REPORT_CONTENT=$(cat status_report.txt)
-          echo "REPORT<<EOF" >> $GITHUB_OUTPUT
-          echo "$REPORT_CONTENT" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-        else
-          echo "REPORT=No specific status report found." >> $GITHUB_OUTPUT
-        fi
-
     - name: Commit and Push History
       if: always()
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        # Since multiple jobs might push at once, let's use a retry or just pull first
+        git pull origin main --rebase
         git add login_history.json
         if git diff --staged --quiet; then
-          echo "No changes to commit"
+          echo "No changes"
         else
-          git commit -m "Update login history [skip ci]"
-          git push
+          git commit -m "Update history for ${{ matrix.url }} [skip ci]"
+          git push origin main
         fi
 
     - name: Upload Login Screenshot
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: login-screenshot
+        name: screenshot-${{ strategy.job-index }}
         path: |
           result_*.png
           error_*.png
@@ -82,17 +90,13 @@ jobs:
         server_port: 465
         username: ${{ secrets.MAIL_USERNAME }}
         password: ${{ secrets.MAIL_PASSWORD }}
-        subject: "❌ [ServiceNow PDI] Auto Login Failed"
+        subject: "❌ [ServiceNow PDI] Login Failed: ${{ matrix.url }}"
         to: go41@naver.com
         from: ServiceNow AutoBot <${{ secrets.MAIL_USERNAME }}>
         body: |
-          ServiceNow PDI Auto Login script failed.
-          
-          ${{ steps.report.outputs.REPORT }}
+          ServiceNow PDI Auto Login failed for: ${{ matrix.url }}
           
           Workflow URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          
-          Please check the error logs and screenshots in the artifacts.
 
     - name: Send Mail on Success
       if: success()
@@ -102,12 +106,10 @@ jobs:
         server_port: 465
         username: ${{ secrets.MAIL_USERNAME }}
         password: ${{ secrets.MAIL_PASSWORD }}
-        subject: "✅ [ServiceNow PDI] Auto Login Success"
+        subject: "✅ [ServiceNow PDI] Login Success: ${{ matrix.url }}"
         to: go41@naver.com
         from: ServiceNow AutoBot <${{ secrets.MAIL_USERNAME }}>
         body: |
-          ServiceNow PDI Auto Login script completed successfully.
-          
-          ${{ steps.report.outputs.REPORT }}
+          ServiceNow PDI Auto Login successful for: ${{ matrix.url }}
           
           Workflow URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
