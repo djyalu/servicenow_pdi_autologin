@@ -1,19 +1,5 @@
 [
   {
-    "timestamp": "2026-03-15 21:28:31",
-    "url": "https://dev364338.service-now.com/",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-03-15 21:28:37",
-    "url": "https://dev198124.service-now.com",
-    "status": "Success",
-    "title": "☆ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-03-16 02:25:26",
     "url": "https://dev364338.service-now.com/",
     "status": "Success",
@@ -1397,6 +1383,20 @@
     "url": "https://dev198124.service-now.com",
     "status": "Success",
     "title": "☆ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-03-28 09:36:43",
+    "url": "https://dev198124.service-now.com",
+    "status": "Success",
+    "title": "☆ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-03-28 09:36:44",
+    "url": "https://dev364338.service-now.com/",
+    "status": "Success",
+    "title": "ServiceNow",
     "error": null
   }
 ]
