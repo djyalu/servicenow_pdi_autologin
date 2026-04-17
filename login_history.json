@@ -1,19 +1,5 @@
 [
   {
-    "timestamp": "2026-04-05 09:38:41",
-    "url": "https://dev364338.service-now.com/",
-    "status": "Error",
-    "title": null,
-    "error": "Page.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#identify-submit\")\n    - locator resolved to <button disabled type=\"submit\" id=\"identify-submit\" class=\"btn-primary-md w-full\">Next</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not enabled\n     - retrying click action\n       - waiting 500ms\n"
-  },
-  {
-    "timestamp": "2026-04-05 09:38:43",
-    "url": "https://dev198124.service-now.com",
-    "status": "Error",
-    "title": null,
-    "error": "Page.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#identify-submit\")\n    - locator resolved to <button disabled type=\"submit\" id=\"identify-submit\" class=\"btn-primary-md w-full\">Next</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not enabled\n     - retrying click action\n       - waiting 500ms\n"
-  },
-  {
     "timestamp": "2026-04-05 12:57:12",
     "url": "https://dev198124.service-now.com",
     "status": "Error",
@@ -1394,6 +1380,20 @@
   },
   {
     "timestamp": "2026-04-17 18:59:51",
+    "url": "https://dev198124.service-now.com",
+    "status": "Success",
+    "title": "☆ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-17 21:40:54",
+    "url": "https://dev364338.service-now.com/",
+    "status": "Error",
+    "title": "Log in | ServiceNow",
+    "error": "Error Message\nUser name or password invalid. To reset your admin password click here. Please note this is different than the credentials used to sign in to the Developer Site."
+  },
+  {
+    "timestamp": "2026-04-17 21:41:07",
     "url": "https://dev198124.service-now.com",
     "status": "Success",
     "title": "☆ServiceNow",
