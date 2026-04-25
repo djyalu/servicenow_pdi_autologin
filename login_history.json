@@ -1,12 +1,5 @@
 [
   {
-    "timestamp": "2026-04-12 15:35:31",
-    "url": "https://dev364338.service-now.com/",
-    "status": "Error",
-    "title": "Log in | ServiceNow",
-    "error": "Error Message\nUser name or password invalid. To reset your admin password click here. Please note this is different than the credentials used to sign in to the Developer Site."
-  },
-  {
     "timestamp": "2026-04-12 15:35:33",
     "url": "https://dev198124.service-now.com",
     "status": "Success",
@@ -1398,5 +1391,12 @@
     "status": "Error",
     "title": null,
     "error": "Page.wait_for_selector: Timeout 300000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-04-25 05:11:29",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Success",
+    "title": "Unified Navigation App | ServiceNow",
+    "error": null
   }
 ]
