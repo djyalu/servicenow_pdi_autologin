@@ -1,12 +1,5 @@
 [
   {
-    "timestamp": "2026-04-13 19:14:40",
-    "url": "https://dev198124.service-now.com",
-    "status": "Success",
-    "title": "☆ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-04-13 21:50:14",
     "url": "https://dev364338.service-now.com/",
     "status": "Error",
@@ -1397,6 +1390,13 @@
     "url": "https://dev380301.service-now.com/",
     "status": "Success",
     "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-27 13:51:48",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Success",
+    "title": "Unified Navigation App | ServiceNow",
     "error": null
   }
 ]
