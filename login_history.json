@@ -1,12 +1,5 @@
 [
   {
-    "timestamp": "2026-04-16 07:45:25",
-    "url": "https://dev198124.service-now.com",
-    "status": "Success",
-    "title": "☆ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-04-16 10:15:25",
     "url": "https://dev364338.service-now.com/",
     "status": "Error",
@@ -1394,6 +1387,13 @@
   },
   {
     "timestamp": "2026-05-02 18:58:27",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-05-02 21:39:47",
     "url": "https://dev380301.service-now.com/",
     "status": "Success",
     "title": "ServiceNow",
