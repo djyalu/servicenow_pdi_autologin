@@ -1,12 +1,5 @@
 [
   {
-    "timestamp": "2026-04-19 02:38:06",
-    "url": "https://dev198124.service-now.com",
-    "status": "Success",
-    "title": "Upgrade Monitor | ☆ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-04-19 05:28:29",
     "url": "https://dev364338.service-now.com/",
     "status": "Error",
@@ -1394,6 +1387,13 @@
   },
   {
     "timestamp": "2026-05-08 16:12:53",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-05-08 19:17:07",
     "url": "https://dev380301.service-now.com/",
     "status": "Success",
     "title": "ServiceNow",
