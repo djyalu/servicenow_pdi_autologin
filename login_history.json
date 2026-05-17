@@ -1,12 +1,5 @@
 [
   {
-    "timestamp": "2026-04-22 19:17:16",
-    "url": "https://dev198124.service-now.com",
-    "status": "Error",
-    "title": null,
-    "error": "Page.wait_for_selector: Timeout 300000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
-  },
-  {
     "timestamp": "2026-04-22 21:50:56",
     "url": "https://dev364338.service-now.com/",
     "status": "Error",
@@ -1397,6 +1390,13 @@
     "url": "https://dev380301.service-now.com/",
     "status": "Success",
     "title": "Unified Navigation App | ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-05-17 10:21:58",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Success",
+    "title": "ServiceNow",
     "error": null
   }
 ]
