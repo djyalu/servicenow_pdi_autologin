@@ -1,12 +1,5 @@
 [
   {
-    "timestamp": "2026-05-02 02:39:08",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Success",
-    "title": "Unified Navigation App | ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-05-02 05:36:31",
     "url": "https://dev380301.service-now.com/",
     "status": "Success",
@@ -1394,6 +1387,13 @@
   },
   {
     "timestamp": "2026-06-04 09:56:18",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Error",
+    "title": null,
+    "error": "Timeout 60000ms exceeded.\n=========================== logs ===========================\n\"commit\" event fired\n\"domcontentloaded\" event fired\n\"load\" event fired\n============================================================"
+  },
+  {
+    "timestamp": "2026-06-04 15:00:16",
     "url": "https://dev380301.service-now.com/",
     "status": "Error",
     "title": null,
