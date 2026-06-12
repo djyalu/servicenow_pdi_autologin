@@ -1,12 +1,5 @@
 [
   {
-    "timestamp": "2026-05-08 02:51:19",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-05-08 05:30:02",
     "url": "https://dev380301.service-now.com/",
     "status": "Success",
@@ -1398,5 +1391,12 @@
     "status": "Error",
     "title": null,
     "error": "Timeout 60000ms exceeded.\n=========================== logs ===========================\n\"commit\" event fired\n\"domcontentloaded\" event fired\n\"load\" event fired\n============================================================"
+  },
+  {
+    "timestamp": "2026-06-12 22:25:07",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
   }
 ]
