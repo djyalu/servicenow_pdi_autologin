@@ -11,6 +11,30 @@ USERNAME = os.getenv("SN_USERNAME")
 PASSWORD = os.getenv("SN_PASSWORD")
 HISTORY_FILE = "login_history.json"
 
+def get_credentials(url):
+    """Resolve per-instance credentials.
+
+    SN_CREDENTIALS (optional) is a JSON object mapping an instance host
+    (or full URL) to {"username": ..., "password": ...}. If a match is
+    found for the current URL it is used; otherwise we fall back to the
+    global SN_USERNAME / SN_PASSWORD secrets. This lets multiple PDIs
+    with different admin accounts share one workflow.
+    """
+    user, pwd = USERNAME, PASSWORD
+    creds_raw = os.getenv("SN_CREDENTIALS")
+    if creds_raw:
+        try:
+            creds = json.loads(creds_raw)
+            host = url.split("//")[-1].strip("/").lower()
+            entry = creds.get(host) or creds.get(url) or creds.get(url.rstrip("/"))
+            if entry:
+                user = entry.get("username", user)
+                pwd = entry.get("password", pwd)
+                print(f"Using per-instance credentials for {host}")
+        except Exception as e:
+            print(f"Warning: could not parse SN_CREDENTIALS: {e}")
+    return user, pwd
+
 def save_history(instance_url, status, title=None, error=None):
     # Create a unique history file for this instance to avoid matrix conflicts
     safe_name = instance_url.split("//")[-1].strip("/").replace(".", "_").replace("/", "_")
@@ -41,9 +65,14 @@ def save_history(instance_url, status, title=None, error=None):
 
 def run():
     print(f"Starting ServiceNow Auto Login for: {URL}")
-    
-    if not URL or not USERNAME or not PASSWORD:
-        print("Error: SN_PDI_URL, SN_USERNAME, and SN_PASSWORD must be set.")
+
+    if not URL:
+        print("Error: SN_PDI_URL must be set.")
+        sys.exit(1)
+
+    username, password = get_credentials(URL)
+    if not username or not password:
+        print("Error: No credentials available. Set SN_USERNAME/SN_PASSWORD or SN_CREDENTIALS.")
         sys.exit(1)
 
     with sync_playwright() as p:
@@ -63,11 +92,11 @@ def run():
                 page.goto(dev_portal_login_url, timeout=120000)
                 
                 page.wait_for_selector("#username", state="visible", timeout=60000)
-                page.fill("#username", USERNAME)
+                page.fill("#username", username)
                 page.click("#identify-submit")
-                
+
                 page.wait_for_selector("#password", state="visible", timeout=60000)
-                page.fill("#password", PASSWORD)
+                page.fill("#password", password)
                 page.press("#password", "Enter")
                 
                 page.wait_for_load_state("networkidle", timeout=120000)
@@ -78,8 +107,8 @@ def run():
             # 2. Standard Login
             print("Waiting for login form...")
             page.wait_for_selector("#user_name", state="visible", timeout=300000)
-            page.fill("#user_name", USERNAME)
-            page.fill("#user_password", PASSWORD)
+            page.fill("#user_name", username)
+            page.fill("#user_password", password)
             page.click("#sysverb_login")
             
             page.wait_for_load_state("networkidle", timeout=60000)

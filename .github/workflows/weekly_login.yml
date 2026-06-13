@@ -31,6 +31,7 @@ jobs:
       SN_PDI_URL: ${{ matrix.url }}
       SN_USERNAME: ${{ secrets.SN_USERNAME }}
       SN_PASSWORD: ${{ secrets.SN_PASSWORD }}
+      SN_CREDENTIALS: ${{ secrets.SN_CREDENTIALS }}
 
     steps:
     - name: Checkout repository
