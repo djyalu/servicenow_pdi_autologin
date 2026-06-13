@@ -70,10 +70,16 @@ def run():
         print("Error: SN_PDI_URL must be set.")
         sys.exit(1)
 
+    # Standard instance login uses per-instance credentials (e.g. admin).
     username, password = get_credentials(URL)
     if not username or not password:
         print("Error: No credentials available. Set SN_USERNAME/SN_PASSWORD or SN_CREDENTIALS.")
         sys.exit(1)
+
+    # Wake-up goes through the ServiceNow developer SSO portal, which needs
+    # the developer account (email), NOT the instance-local admin. Always use
+    # the global SN_USERNAME / SN_PASSWORD for that step.
+    sso_user, sso_pwd = USERNAME, PASSWORD
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -88,18 +94,25 @@ def run():
             content = page.content().lower()
             if "hibernating" in content or "wake your instance" in content:
                 print("Detected PDI Hibernation. Waking up...")
+                if not sso_user or not sso_pwd:
+                    raise RuntimeError(
+                        "Instance is hibernating but no developer SSO account "
+                        "(SN_USERNAME/SN_PASSWORD) is configured to wake it.")
                 dev_portal_login_url = "https://signon.service-now.com/x_snc_ssoauth.do?redirectUri=https://developer.servicenow.com/dev.do"
                 page.goto(dev_portal_login_url, timeout=120000)
-                
+
                 page.wait_for_selector("#username", state="visible", timeout=60000)
-                page.fill("#username", username)
+                page.fill("#username", sso_user)
                 page.click("#identify-submit")
 
                 page.wait_for_selector("#password", state="visible", timeout=60000)
-                page.fill("#password", password)
+                page.fill("#password", sso_pwd)
                 page.press("#password", "Enter")
-                
-                page.wait_for_load_state("networkidle", timeout=120000)
+
+                try:
+                    page.wait_for_load_state("networkidle", timeout=120000)
+                except Exception:
+                    pass  # networkidle can hang on SSO pages; proceed regardless
                 print("Successfully logged into Developer Portal. Waiting for wake-up...")
                 time.sleep(15) 
                 page.goto(URL, timeout=300000)
@@ -110,9 +123,16 @@ def run():
             page.fill("#user_name", username)
             page.fill("#user_password", password)
             page.click("#sysverb_login")
-            
-            page.wait_for_load_state("networkidle", timeout=60000)
-            
+
+            # ServiceNow keeps long-lived connections open, so networkidle may
+            # never fire. Treat a timeout here as non-fatal and judge success by
+            # the resulting page title instead.
+            try:
+                page.wait_for_load_state("networkidle", timeout=60000)
+            except Exception:
+                print("networkidle wait timed out; continuing to title check.")
+                page.wait_for_timeout(5000)
+
             error_message = None
             try:
                 error_selector = ".outputmsg_error"
