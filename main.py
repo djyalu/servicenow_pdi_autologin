@@ -63,6 +63,34 @@ def save_history(instance_url, status, title=None, error=None):
         json.dump(history, f, indent=2, ensure_ascii=False)
     print(f"History for {instance_url} saved to {instance_history_file}")
 
+def dismiss_cookie_banner(page):
+    """Best-effort dismissal of the developer.servicenow.com cookie banner,
+    which otherwise overlays and blocks clicks."""
+    for sel in ["text=Accept and Proceed", "button:has-text('Accept')",
+                "#onetrust-accept-btn-handler"]:
+        try:
+            el = page.query_selector(sel)
+            if el and el.is_visible():
+                el.click()
+                print(f"Dismissed cookie banner via {sel}")
+                return
+        except Exception:
+            pass
+
+def try_click_wake(page):
+    """If a wake control is visible, click it. Returns True if clicked."""
+    for sel in ["button:has-text('Wake')", "a:has-text('Wake')",
+                "text=Wake your instance", "text=Wake instance", "text=Wake"]:
+        try:
+            el = page.query_selector(sel)
+            if el and el.is_visible():
+                el.click()
+                print(f"Clicked wake control: {sel}")
+                return True
+        except Exception:
+            pass
+    return False
+
 def run():
     print(f"Starting ServiceNow Auto Login for: {URL}")
 
@@ -115,13 +143,30 @@ def run():
                     page.wait_for_load_state("networkidle", timeout=120000)
                 except Exception:
                     pass  # networkidle can hang on SSO pages; proceed regardless
-                print("Successfully logged into Developer Portal. Waiting for wake-up...")
-                time.sleep(15) 
-                page.goto(URL, timeout=300000)
+                print("Logged into Developer Portal. Triggering wake-up...")
+                dismiss_cookie_banner(page)
+                time.sleep(10)
+
+                # Hibernating PDIs come back gradually. Poll the instance URL,
+                # clicking any wake control we find, until the login form shows
+                # up or we exhaust the budget (~6 min).
+                woke = False
+                for attempt in range(1, 19):
+                    page.goto(URL, timeout=120000)
+                    dismiss_cookie_banner(page)
+                    if page.query_selector("#user_name"):
+                        woke = True
+                        print(f"Login form appeared after {attempt} wake attempt(s).")
+                        break
+                    try_click_wake(page)
+                    print(f"Wake attempt {attempt}/18: instance not ready, waiting 20s...")
+                    time.sleep(20)
+                if not woke:
+                    print("Instance did not finish waking within the budget.")
 
             # 2. Standard Login
             print("Waiting for login form...")
-            page.wait_for_selector("#user_name", state="visible", timeout=300000)
+            page.wait_for_selector("#user_name", state="visible", timeout=120000)
             page.fill("#user_name", username)
             page.fill("#user_password", password)
             page.click("#sysverb_login")
