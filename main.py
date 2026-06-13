@@ -11,28 +11,50 @@ USERNAME = os.getenv("SN_USERNAME")
 PASSWORD = os.getenv("SN_PASSWORD")
 HISTORY_FILE = "login_history.json"
 
-def get_credentials(url):
-    """Resolve per-instance credentials.
+def _credentials_entry(url):
+    """Look up this instance's entry in SN_CREDENTIALS, if any.
 
     SN_CREDENTIALS (optional) is a JSON object mapping an instance host
-    (or full URL) to {"username": ..., "password": ...}. If a match is
-    found for the current URL it is used; otherwise we fall back to the
-    global SN_USERNAME / SN_PASSWORD secrets. This lets multiple PDIs
-    with different admin accounts share one workflow.
+    (or full URL) to a credentials object, e.g.:
+      {"dev404356.service-now.com": {
+          "username": "admin", "password": "...",
+          "dev_username": "you@example.com", "dev_password": "..."}}
+    Returns the matched dict, or {} if none/parse error.
     """
-    user, pwd = USERNAME, PASSWORD
     creds_raw = os.getenv("SN_CREDENTIALS")
-    if creds_raw:
-        try:
-            creds = json.loads(creds_raw)
-            host = url.split("//")[-1].strip("/").lower()
-            entry = creds.get(host) or creds.get(url) or creds.get(url.rstrip("/"))
-            if entry:
-                user = entry.get("username", user)
-                pwd = entry.get("password", pwd)
-                print(f"Using per-instance credentials for {host}")
-        except Exception as e:
-            print(f"Warning: could not parse SN_CREDENTIALS: {e}")
+    if not creds_raw:
+        return {}
+    try:
+        creds = json.loads(creds_raw)
+        host = url.split("//")[-1].strip("/").lower()
+        return creds.get(host) or creds.get(url) or creds.get(url.rstrip("/")) or {}
+    except Exception as e:
+        print(f"Warning: could not parse SN_CREDENTIALS: {e}")
+        return {}
+
+def get_credentials(url):
+    """Resolve per-instance standard-login credentials, falling back to the
+    global SN_USERNAME / SN_PASSWORD secrets."""
+    user, pwd = USERNAME, PASSWORD
+    entry = _credentials_entry(url)
+    if entry:
+        user = entry.get("username", user)
+        pwd = entry.get("password", pwd)
+        host = url.split("//")[-1].strip("/").lower()
+        print(f"Using per-instance credentials for {host}")
+    return user, pwd
+
+def get_wake_credentials(url):
+    """Resolve the developer.servicenow.com account used to wake a hibernating
+    PDI. Precedence: per-instance dev_username/dev_password in SN_CREDENTIALS,
+    then global SN_DEV_USERNAME/SN_DEV_PASSWORD, then SN_USERNAME/SN_PASSWORD."""
+    user = os.getenv("SN_DEV_USERNAME") or USERNAME
+    pwd = os.getenv("SN_DEV_PASSWORD") or PASSWORD
+    entry = _credentials_entry(url)
+    if entry.get("dev_username"):
+        user = entry["dev_username"]
+    if entry.get("dev_password"):
+        pwd = entry["dev_password"]
     return user, pwd
 
 def save_history(instance_url, status, title=None, error=None):
@@ -105,11 +127,10 @@ def run():
         sys.exit(1)
 
     # Wake-up goes through the ServiceNow developer SSO portal, which needs
-    # the developer account (email), NOT the instance-local admin. Prefer the
-    # dedicated SN_DEV_USERNAME / SN_DEV_PASSWORD, falling back to the global
-    # SN_USERNAME / SN_PASSWORD for backward compatibility.
-    sso_user = os.getenv("SN_DEV_USERNAME") or USERNAME
-    sso_pwd = os.getenv("SN_DEV_PASSWORD") or PASSWORD
+    # the developer account (email), NOT the instance-local admin. This may be
+    # per-instance (SN_CREDENTIALS dev_username/dev_password) or global
+    # (SN_DEV_USERNAME / SN_DEV_PASSWORD).
+    sso_user, sso_pwd = get_wake_credentials(URL)
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
