@@ -113,6 +113,39 @@ def try_click_wake(page):
             pass
     return False
 
+def do_login(page, url, username, password):
+    """Fill and submit the standard ServiceNow login form, then judge the
+    result by the page title. Writes a result screenshot and returns
+    (ok: bool, title: str, error: str|None)."""
+    print("Waiting for login form...")
+    page.wait_for_selector("#user_name", state="visible", timeout=120000)
+    page.fill("#user_name", username)
+    page.fill("#user_password", password)
+    page.click("#sysverb_login")
+
+    # ServiceNow keeps long-lived connections open, so networkidle may never
+    # fire. Treat a timeout here as non-fatal and judge success by the title.
+    try:
+        page.wait_for_load_state("networkidle", timeout=60000)
+    except Exception:
+        print("networkidle wait timed out; continuing to title check.")
+        page.wait_for_timeout(5000)
+
+    error_message = None
+    try:
+        if page.is_visible(".outputmsg_error"):
+            error_message = page.inner_text(".outputmsg_error").strip()
+    except Exception:
+        pass
+
+    title = page.title()
+    print(f"Current Page Title: {title}")
+    safe_name = url.split("//")[-1].strip("/").replace(".", "_").replace("/", "_")
+    page.screenshot(path=f"result_{safe_name}.png")
+
+    ok = not ("Sign In" in title or "Login" in title or error_message)
+    return ok, title, error_message
+
 def run():
     print(f"Starting ServiceNow Auto Login for: {URL}")
 
@@ -140,8 +173,9 @@ def run():
         try:
             print(f"Navigating to {URL}...")
             page.goto(URL, timeout=300000)
-            
+
             # 1. Detection: Hibernation
+            woke = False
             content = page.content().lower()
             if "hibernating" in content or "wake your instance" in content:
                 print("Detected PDI Hibernation. Waking up...")
@@ -186,43 +220,29 @@ def run():
                     print("Instance did not finish waking within the budget.")
 
             # 2. Standard Login
-            print("Waiting for login form...")
-            page.wait_for_selector("#user_name", state="visible", timeout=120000)
-            page.fill("#user_name", username)
-            page.fill("#user_password", password)
-            page.click("#sysverb_login")
-
-            # ServiceNow keeps long-lived connections open, so networkidle may
-            # never fire. Treat a timeout here as non-fatal and judge success by
-            # the resulting page title instead.
-            try:
-                page.wait_for_load_state("networkidle", timeout=60000)
-            except Exception:
-                print("networkidle wait timed out; continuing to title check.")
-                page.wait_for_timeout(5000)
-
-            error_message = None
-            try:
-                error_selector = ".outputmsg_error"
-                if page.is_visible(error_selector):
-                    error_message = page.inner_text(error_selector).strip()
-            except:
-                pass
-
-            current_title = page.title()
-            print(f"Current Page Title: {current_title}")
-            
-            safe_name = URL.split("//")[-1].strip("/").replace(".", "_").replace("/", "_")
-            screenshot_path = f"result_{safe_name}.png"
-            page.screenshot(path=screenshot_path)
-            
-            if "Sign In" in current_title or "Login" in current_title or error_message:
+            ok, current_title, error_message = do_login(page, URL, username, password)
+            if not ok:
                 print(f"Login failed for {URL}")
                 save_history(URL, "Error", title=current_title, error=error_message or "Login redirected")
                 sys.exit(1)
-            else:
-                print(f"Login successful for {URL}")
-                save_history(URL, "Success", title=current_title)
+            print(f"Login successful for {URL}")
+            save_history(URL, "Success", title=current_title)
+
+            # 3. Post-wake re-login: if we just woke the instance from
+            # hibernation, log in once more after 30 minutes so the freshly
+            # woken instance is exercised again and stays active.
+            if woke:
+                print("Instance was hibernating; waiting 30 minutes before a second login...")
+                time.sleep(1800)
+                page.goto(URL, timeout=300000)
+                ok2, title2, error2 = do_login(page, URL, username, password)
+                if ok2:
+                    print(f"Second login successful for {URL}")
+                    save_history(URL, "Success", title=title2)
+                else:
+                    print(f"Second login failed for {URL}")
+                    save_history(URL, "Error", title=title2, error=error2 or "Second login redirected")
+                    sys.exit(1)
 
         except Exception as e:
             print(f"Error: {e}")
