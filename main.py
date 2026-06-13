@@ -77,9 +77,11 @@ def run():
         sys.exit(1)
 
     # Wake-up goes through the ServiceNow developer SSO portal, which needs
-    # the developer account (email), NOT the instance-local admin. Always use
-    # the global SN_USERNAME / SN_PASSWORD for that step.
-    sso_user, sso_pwd = USERNAME, PASSWORD
+    # the developer account (email), NOT the instance-local admin. Prefer the
+    # dedicated SN_DEV_USERNAME / SN_DEV_PASSWORD, falling back to the global
+    # SN_USERNAME / SN_PASSWORD for backward compatibility.
+    sso_user = os.getenv("SN_DEV_USERNAME") or USERNAME
+    sso_pwd = os.getenv("SN_DEV_PASSWORD") or PASSWORD
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)

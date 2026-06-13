@@ -32,6 +32,8 @@ jobs:
       SN_USERNAME: ${{ secrets.SN_USERNAME }}
       SN_PASSWORD: ${{ secrets.SN_PASSWORD }}
       SN_CREDENTIALS: ${{ secrets.SN_CREDENTIALS }}
+      SN_DEV_USERNAME: ${{ secrets.SN_DEV_USERNAME }}
+      SN_DEV_PASSWORD: ${{ secrets.SN_DEV_PASSWORD }}
 
     steps:
     - name: Checkout repository
