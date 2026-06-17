@@ -1,33 +1,5 @@
 [
   {
-    "timestamp": "2026-05-29 03:32:19",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-05-29 09:54:16",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Error",
-    "title": null,
-    "error": "Timeout 60000ms exceeded.\n=========================== logs ===========================\n\"commit\" event fired\n\"domcontentloaded\" event fired\n\"load\" event fired\n============================================================"
-  },
-  {
-    "timestamp": "2026-05-29 15:28:23",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-05-29 20:24:35",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-05-29 22:28:26",
     "url": "https://dev380301.service-now.com/",
     "status": "Success",
@@ -1394,6 +1366,34 @@
   },
   {
     "timestamp": "2026-06-17 15:37:31",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-06-17 18:15:44",
+    "url": "https://dev400970.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-17 18:15:49",
+    "url": "https://dev404357.service-now.com",
+    "status": "Success",
+    "title": "Unified Navigation App | ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-17 18:23:58",
+    "url": "https://dev404356.service-now.com",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-06-17 18:24:15",
     "url": "https://dev380301.service-now.com/",
     "status": "Error",
     "title": null,
