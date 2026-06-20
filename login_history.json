@@ -1,26 +1,5 @@
 [
   {
-    "timestamp": "2026-06-12 03:53:51",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-06-12 10:12:57",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Error",
-    "title": null,
-    "error": "Timeout 60000ms exceeded.\n=========================== logs ===========================\n\"commit\" event fired\n\"domcontentloaded\" event fired\n\"load\" event fired\n============================================================"
-  },
-  {
-    "timestamp": "2026-06-12 14:57:00",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Error",
-    "title": null,
-    "error": "Page.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#sysverb_login\")\n    - locator resolved to <button type=\"submit\" id=\"sysverb_login\" name=\"not_important\" class=\"btn btn-primary\" onclick=\"loginPage.sys_action.value=this.id;\">Log in</button>\n  - attempting click action\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling into view if needed\n    - done scrolling\n    - performing click action\n    - click action done\n    - waiting for scheduled navigations to finish\n"
-  },
-  {
     "timestamp": "2026-06-12 17:39:41",
     "url": "https://dev380301.service-now.com/",
     "status": "Error",
@@ -1394,6 +1373,27 @@
   },
   {
     "timestamp": "2026-06-20 03:45:45",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-06-20 07:50:36",
+    "url": "https://dev404357.service-now.com",
+    "status": "Success",
+    "title": "Unified Navigation App | ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-20 07:50:40",
+    "url": "https://dev400970.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-20 07:59:06",
     "url": "https://dev380301.service-now.com/",
     "status": "Error",
     "title": null,
