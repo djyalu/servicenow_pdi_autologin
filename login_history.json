@@ -1,26 +1,5 @@
 [
   {
-    "timestamp": "2026-06-13 02:12:05",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Error",
-    "title": null,
-    "error": "Timeout 60000ms exceeded.\n=========================== logs ===========================\n\"commit\" event fired\n\"domcontentloaded\" event fired\n\"load\" event fired\n============================================================"
-  },
-  {
-    "timestamp": "2026-06-13 02:15:33",
-    "url": "https://dev400970.service-now.com",
-    "status": "Error",
-    "title": null,
-    "error": "Page.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#identify-submit\")\n    - locator resolved to <button disabled type=\"submit\" id=\"identify-submit\" class=\"btn-primary-md w-full\">Next</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not enabled\n     - retrying click action\n       - waiting 500ms\n"
-  },
-  {
-    "timestamp": "2026-06-13 02:16:21",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-06-13 02:22:02",
     "url": "https://dev380301.service-now.com/",
     "status": "Success",
@@ -1394,6 +1373,27 @@
   },
   {
     "timestamp": "2026-06-20 10:41:11",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-06-20 14:02:12",
+    "url": "https://dev400970.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-20 14:02:14",
+    "url": "https://dev404357.service-now.com",
+    "status": "Success",
+    "title": "Unified Navigation App | ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-20 14:11:22",
     "url": "https://dev380301.service-now.com/",
     "status": "Error",
     "title": null,
