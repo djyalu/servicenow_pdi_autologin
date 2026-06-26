@@ -1,33 +1,5 @@
 [
   {
-    "timestamp": "2026-06-18 20:25:58",
-    "url": "https://dev400970.service-now.com",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-06-18 20:34:21",
-    "url": "https://dev404356.service-now.com",
-    "status": "Error",
-    "title": null,
-    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
-  },
-  {
-    "timestamp": "2026-06-18 20:34:32",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Error",
-    "title": null,
-    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
-  },
-  {
-    "timestamp": "2026-06-18 23:45:03",
-    "url": "https://dev400970.service-now.com",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-06-18 23:45:03",
     "url": "https://dev404357.service-now.com",
     "status": "Success",
@@ -1394,6 +1366,34 @@
   },
   {
     "timestamp": "2026-06-25 23:19:38",
+    "url": "https://dev404356.service-now.com",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-06-26 03:38:09",
+    "url": "https://dev400970.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-26 03:38:12",
+    "url": "https://dev404357.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-26 03:39:35",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-26 03:40:12",
     "url": "https://dev404356.service-now.com",
     "status": "Error",
     "title": null,
