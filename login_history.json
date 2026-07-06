@@ -1,33 +1,5 @@
 [
   {
-    "timestamp": "2026-06-30 10:56:33",
-    "url": "https://dev400970.service-now.com",
-    "status": "Success",
-    "title": "Unified Navigation App | ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-06-30 10:56:35",
-    "url": "https://dev404357.service-now.com",
-    "status": "Success",
-    "title": "Unified Navigation App | ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-06-30 10:58:30",
-    "url": "https://dev404356.service-now.com",
-    "status": "Error",
-    "title": null,
-    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
-  },
-  {
-    "timestamp": "2026-06-30 11:01:33",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Error",
-    "title": null,
-    "error": "Page.goto: Timeout 300000ms exceeded.\nCall log:\n  - navigating to \"https://dev380301.service-now.com/\", waiting until \"load\"\n"
-  },
-  {
     "timestamp": "2026-06-30 14:17:20",
     "url": "https://dev400970.service-now.com",
     "status": "Success",
@@ -1394,6 +1366,34 @@
   },
   {
     "timestamp": "2026-07-06 13:52:02",
+    "url": "https://dev400970.service-now.com",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-07-06 16:51:46",
+    "url": "https://dev404357.service-now.com",
+    "status": "Success",
+    "title": "Unified Navigation App | ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-07-06 16:51:55",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Success",
+    "title": "",
+    "error": null
+  },
+  {
+    "timestamp": "2026-07-06 16:53:46",
+    "url": "https://dev404356.service-now.com",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-07-06 17:00:01",
     "url": "https://dev400970.service-now.com",
     "status": "Error",
     "title": null,
