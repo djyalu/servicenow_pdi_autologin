@@ -1,33 +1,5 @@
 [
   {
-    "timestamp": "2026-07-11 20:46:01",
-    "url": "https://dev400970.service-now.com",
-    "status": "Success",
-    "title": "Unified Navigation App | ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-07-11 22:47:05",
-    "url": "https://dev404356.service-now.com",
-    "status": "Success",
-    "title": "Unified Navigation App | ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-07-11 22:47:07",
-    "url": "https://dev400970.service-now.com",
-    "status": "Success",
-    "title": "Unified Navigation App | ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-07-11 22:47:08",
-    "url": "https://dev404357.service-now.com",
-    "status": "Success",
-    "title": "Unified Navigation App | ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-07-11 22:55:19",
     "url": "https://dev380301.service-now.com/",
     "status": "Error",
@@ -1394,6 +1366,34 @@
   },
   {
     "timestamp": "2026-07-17 10:04:47",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-07-17 11:23:10",
+    "url": "https://dev404356.service-now.com",
+    "status": "Success",
+    "title": "Unified Navigation App | ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-07-17 11:23:13",
+    "url": "https://dev400970.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-07-17 11:23:25",
+    "url": "https://dev404357.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-07-17 11:31:32",
     "url": "https://dev380301.service-now.com/",
     "status": "Error",
     "title": null,
