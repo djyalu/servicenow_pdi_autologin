@@ -1,33 +1,5 @@
 [
   {
-    "timestamp": "2026-07-30 10:32:22",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Error",
-    "title": null,
-    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
-  },
-  {
-    "timestamp": "2026-07-30 13:58:29",
-    "url": "https://dev404357.service-now.com",
-    "status": "Success",
-    "title": "Unified Navigation App | ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-07-30 13:58:39",
-    "url": "https://dev400970.service-now.com",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-07-30 13:58:41",
-    "url": "https://dev404356.service-now.com",
-    "status": "Success",
-    "title": "Unified Navigation App | ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-07-30 14:07:16",
     "url": "https://dev380301.service-now.com/",
     "status": "Error",
@@ -1394,6 +1366,34 @@
   },
   {
     "timestamp": "2026-08-05 02:34:59",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-08-05 06:27:18",
+    "url": "https://dev404357.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-08-05 06:27:21",
+    "url": "https://dev400970.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-08-05 06:35:34",
+    "url": "https://dev404356.service-now.com",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-08-05 06:35:41",
     "url": "https://dev380301.service-now.com/",
     "status": "Error",
     "title": null,
