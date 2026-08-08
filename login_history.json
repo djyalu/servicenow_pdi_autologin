@@ -1,33 +1,5 @@
 [
   {
-    "timestamp": "2026-08-02 13:27:03",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Error",
-    "title": null,
-    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
-  },
-  {
-    "timestamp": "2026-08-02 15:00:51",
-    "url": "https://dev400970.service-now.com",
-    "status": "Success",
-    "title": "Unified Navigation App | ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-08-02 15:00:54",
-    "url": "https://dev404356.service-now.com",
-    "status": "Success",
-    "title": "Unified Navigation App | ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-08-02 15:00:58",
-    "url": "https://dev404357.service-now.com",
-    "status": "Success",
-    "title": "Unified Navigation App | ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-08-02 16:57:29",
     "url": "https://dev404356.service-now.com",
     "status": "Success",
@@ -1394,6 +1366,34 @@
   },
   {
     "timestamp": "2026-08-08 14:39:20",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-08-08 16:31:53",
+    "url": "https://dev404356.service-now.com",
+    "status": "Error",
+    "title": "Log in | ServiceNow",
+    "error": "Error Message\nUser name or password invalid. To reset your admin password click here. Please note this is different than the credentials used to sign in to the Developer Site."
+  },
+  {
+    "timestamp": "2026-08-08 16:31:53",
+    "url": "https://dev404357.service-now.com",
+    "status": "Success",
+    "title": "Unified Navigation App | ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-08-08 16:32:00",
+    "url": "https://dev400970.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-08-08 16:40:27",
     "url": "https://dev380301.service-now.com/",
     "status": "Error",
     "title": null,
