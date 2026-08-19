@@ -1,33 +1,5 @@
 [
   {
-    "timestamp": "2026-08-15 04:37:21",
-    "url": "https://dev404356.service-now.com",
-    "status": "Error",
-    "title": null,
-    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
-  },
-  {
-    "timestamp": "2026-08-15 06:36:01",
-    "url": "https://dev404357.service-now.com",
-    "status": "Success",
-    "title": "Unified Navigation App | ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-08-15 06:36:06",
-    "url": "https://dev400970.service-now.com",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-08-15 06:38:01",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Error",
-    "title": null,
-    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
-  },
-  {
     "timestamp": "2026-08-15 06:44:19",
     "url": "https://dev404356.service-now.com",
     "status": "Error",
@@ -1394,6 +1366,34 @@
   },
   {
     "timestamp": "2026-08-19 08:44:08",
+    "url": "https://dev404356.service-now.com",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-08-19 10:27:13",
+    "url": "https://dev404357.service-now.com",
+    "status": "Success",
+    "title": "Unified Navigation App | ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-08-19 10:29:07",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-08-19 10:35:30",
+    "url": "https://dev400970.service-now.com",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-08-19 10:35:32",
     "url": "https://dev404356.service-now.com",
     "status": "Error",
     "title": null,
