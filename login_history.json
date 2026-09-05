@@ -1,33 +1,5 @@
 [
   {
-    "timestamp": "2026-08-26 03:03:37",
-    "url": "https://dev404357.service-now.com",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-08-26 03:03:39",
-    "url": "https://dev404356.service-now.com",
-    "status": "Error",
-    "title": "Log in | ServiceNow",
-    "error": "Error Message\nUser name or password invalid. To reset your admin password click here. Please note this is different than the credentials used to sign in to the Developer Site."
-  },
-  {
-    "timestamp": "2026-08-26 03:05:33",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Error",
-    "title": null,
-    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
-  },
-  {
-    "timestamp": "2026-08-26 03:11:57",
-    "url": "https://dev400970.service-now.com",
-    "status": "Error",
-    "title": null,
-    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
-  },
-  {
     "timestamp": "2026-08-26 04:38:05",
     "url": "https://dev404356.service-now.com",
     "status": "Error",
@@ -1394,6 +1366,34 @@
   },
   {
     "timestamp": "2026-09-05 08:12:46",
+    "url": "https://dev404356.service-now.com",
+    "status": "Error",
+    "title": null,
+    "error": "Page.wait_for_selector: Timeout 120000ms exceeded.\nCall log:\n  - waiting for locator(\"#user_name\") to be visible\n"
+  },
+  {
+    "timestamp": "2026-09-05 13:15:36",
+    "url": "https://dev380301.service-now.com/",
+    "status": "Error",
+    "title": null,
+    "error": "Page.goto: net::ERR_NAME_NOT_RESOLVED at https://dev380301.service-now.com/\nCall log:\n  - navigating to \"https://dev380301.service-now.com/\", waiting until \"load\"\n"
+  },
+  {
+    "timestamp": "2026-09-05 13:15:36",
+    "url": "https://dev400970.service-now.com",
+    "status": "Error",
+    "title": "Log in | ServiceNow",
+    "error": "Error Message\nUser name or password invalid. To reset your admin password click here. Please note this is different than the credentials used to sign in to the Developer Site."
+  },
+  {
+    "timestamp": "2026-09-05 13:15:47",
+    "url": "https://dev404357.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-09-05 13:23:55",
     "url": "https://dev404356.service-now.com",
     "status": "Error",
     "title": null,
