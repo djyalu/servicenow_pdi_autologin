@@ -1,19 +1,5 @@
 [
   {
-    "timestamp": "2026-09-12 08:23:00",
-    "url": "https://dev380301.service-now.com/",
-    "status": "Error",
-    "title": null,
-    "error": "Page.goto: net::ERR_NAME_NOT_RESOLVED at https://dev380301.service-now.com/\nCall log:\n  - navigating to \"https://dev380301.service-now.com/\", waiting until \"load\"\n"
-  },
-  {
-    "timestamp": "2026-09-12 08:23:04",
-    "url": "https://dev404357.service-now.com",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-09-12 08:23:05",
     "url": "https://dev404356.service-now.com",
     "status": "Error",
@@ -1395,6 +1381,20 @@
   {
     "timestamp": "2026-09-22 21:06:49",
     "url": "https://dev404357.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-09-23 00:00:59",
+    "url": "https://dev404357.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-09-23 00:01:01",
+    "url": "https://dev199383.service-now.com",
     "status": "Success",
     "title": "ServiceNow",
     "error": null
