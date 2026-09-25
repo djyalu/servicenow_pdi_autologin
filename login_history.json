@@ -1,19 +1,5 @@
 [
   {
-    "timestamp": "2026-09-13 08:57:56",
-    "url": "https://dev400970.service-now.com",
-    "status": "Error",
-    "title": "Log in | ServiceNow",
-    "error": "Error Message\nUser name or password invalid. To reset your admin password click here. Please note this is different than the credentials used to sign in to the Developer Site."
-  },
-  {
-    "timestamp": "2026-09-13 08:58:08",
-    "url": "https://dev404357.service-now.com",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-09-13 14:04:18",
     "url": "https://dev380301.service-now.com/",
     "status": "Error",
@@ -1395,6 +1381,20 @@
   {
     "timestamp": "2026-09-25 15:00:25",
     "url": "https://dev199383.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-09-25 19:50:47",
+    "url": "https://dev199383.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-09-25 19:50:53",
+    "url": "https://dev404357.service-now.com",
     "status": "Success",
     "title": "ServiceNow",
     "error": null
