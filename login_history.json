@@ -1,19 +1,5 @@
 [
   {
-    "timestamp": "2026-09-25 19:50:47",
-    "url": "https://dev199383.service-now.com",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
-    "timestamp": "2026-09-25 19:50:53",
-    "url": "https://dev404357.service-now.com",
-    "status": "Success",
-    "title": "ServiceNow",
-    "error": null
-  },
-  {
     "timestamp": "2026-09-25 23:06:20",
     "url": "https://dev404357.service-now.com",
     "status": "Success",
@@ -1394,6 +1380,20 @@
   },
   {
     "timestamp": "2026-10-18 20:08:56",
+    "url": "https://dev199383.service-now.com",
+    "status": "Success",
+    "title": "Unified Navigation App | ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-10-18 23:55:31",
+    "url": "https://dev404357.service-now.com",
+    "status": "Success",
+    "title": "ServiceNow",
+    "error": null
+  },
+  {
+    "timestamp": "2026-10-18 23:55:34",
     "url": "https://dev199383.service-now.com",
     "status": "Success",
     "title": "Unified Navigation App | ServiceNow",
